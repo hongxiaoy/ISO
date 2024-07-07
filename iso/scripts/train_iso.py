@@ -1,17 +1,17 @@
 import sys
 sys.path.append('/home/hongxiao.yu/projects/ISO')
-from monoscene.data.semantic_kitti.kitti_dm import KittiDataModule
-from monoscene.data.semantic_kitti.params import (
+from iso.data.semantic_kitti.kitti_dm import KittiDataModule
+from iso.data.semantic_kitti.params import (
     semantic_kitti_class_frequencies,
     kitti_class_names,
 )
-from monoscene.data.NYU.params import (
+from iso.data.NYU.params import (
     class_weights as NYU_class_weights,
     NYU_class_names,
 )
-from monoscene.data.NYU.nyu_dm import NYUDataModule
+from iso.data.NYU.nyu_dm import NYUDataModule
 from torch.utils.data.dataloader import DataLoader
-from monoscene.models.monoscene import MonoScene
+from iso.models.iso import ISO
 from pytorch_lightning import Trainer
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import TensorBoardLogger
@@ -132,8 +132,8 @@ def main(config: DictConfig):
 
     print(exp_name)
 
-    # Initialize MonoScene model
-    model = MonoScene(
+    # Initialize ISO model
+    model = ISO(
         dataset=config.dataset,
         frustum_size=config.frustum_size,
         project_scale=project_scale,

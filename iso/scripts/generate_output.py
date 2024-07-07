@@ -1,8 +1,8 @@
 from pytorch_lightning import Trainer
-from monoscene.models.monoscene import MonoScene
-from monoscene.data.NYU.nyu_dm import NYUDataModule
-from monoscene.data.semantic_kitti.kitti_dm import KittiDataModule
-from monoscene.data.kitti_360.kitti_360_dm import Kitti360DataModule
+from iso.models.iso import ISO
+from iso.data.NYU.nyu_dm import NYUDataModule
+from iso.data.semantic_kitti.kitti_dm import KittiDataModule
+from iso.data.kitti_360.kitti_360_dm import Kitti360DataModule
 import hydra
 from omegaconf import DictConfig
 import torch
@@ -13,7 +13,7 @@ from tqdm import tqdm
 import pickle
 
 
-@hydra.main(config_name="../config/monoscene.yaml")
+@hydra.main(config_name="../config/iso.yaml")
 def main(config: DictConfig):
     torch.set_grad_enabled(False)
 
@@ -66,14 +66,14 @@ def main(config: DictConfig):
     # Load pretrained models
     if config.dataset == "NYU":
         model_path = os.path.join(
-            get_original_cwd(), "trained_models", "monoscene_nyu.ckpt"
+            get_original_cwd(), "trained_models", "iso_nyu.ckpt"
         )
     else:
         model_path = os.path.join(
-            get_original_cwd(), "trained_models", "monoscene_kitti.ckpt"
+            get_original_cwd(), "trained_models", "iso_kitti.ckpt"
         )
 
-    model = MonoScene.load_from_checkpoint(
+    model = ISO.load_from_checkpoint(
         model_path,
         feature=feature,
         project_scale=project_scale,

@@ -5,7 +5,7 @@ from torch.utils.data import Dataset
 import numpy as np
 from PIL import Image, ImageTransform
 from torchvision import transforms
-from monoscene.data.utils.helpers import (
+from iso.data.utils.helpers import (
     vox2pix,
     compute_local_frustums,
     compute_CP_mega_matrix,

@@ -1,12 +1,12 @@
 import torch
-from monoscene.models.monoscene import MonoScene
+from iso.models.iso import ISO
 
 torch.manual_seed(84)
 torch.cuda.manual_seed_all(84)
 
 
-path = 'trained_models/monoscene_nyu.ckpt'
-model = MonoScene.load_from_checkpoint(
+path = 'trained_models/iso_nyu.ckpt'
+model = ISO.load_from_checkpoint(
         path,
         feature=200,
         project_scale=1,

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from monoscene.models.modules import (
+from iso.models.modules import (
     Process,
     ASPP,
 )

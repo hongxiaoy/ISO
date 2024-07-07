@@ -6,8 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from monoscene.models.CRP3D import CPMegaVoxels
-from monoscene.models.modules import (
+from iso.models.CRP3D import CPMegaVoxels
+from iso.models.modules import (
     Process,
     Upsample,
     Downsample,

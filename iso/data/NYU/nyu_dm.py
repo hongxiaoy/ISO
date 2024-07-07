@@ -1,8 +1,8 @@
 from torch.utils.data.dataloader import DataLoader
-from monoscene.data.NYU.nyu_dataset import NYUDataset
-from monoscene.data.NYU.collate import collate_fn
+from iso.data.NYU.nyu_dataset import NYUDataset
+from iso.data.NYU.collate import collate_fn
 import pytorch_lightning as pl
-from monoscene.data.utils.torch_util import worker_init_fn
+from iso.data.utils.torch_util import worker_init_fn
 
 
 class NYUDataModule(pl.LightningDataModule):

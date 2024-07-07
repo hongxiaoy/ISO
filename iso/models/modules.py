@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import math
-from monoscene.models.DDR import Bottleneck3D
+from iso.models.DDR import Bottleneck3D
 
 
 class ASPP(nn.Module):
