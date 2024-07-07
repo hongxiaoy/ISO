@@ -1,0 +1,1 @@
+python monoscene/scripts/train_monoscene.py n_gpus=2 batch_size=4

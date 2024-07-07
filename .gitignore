@@ -1,0 +1,13 @@
+*.pyc
+__pycache__/
+*.egg-info/
+outputs/
+trained_models/*.ckpt
+monoscene_output/*
+core*
+images
+.vscode
+logdir
+depth_anything
+checkpoints
+logdir2
