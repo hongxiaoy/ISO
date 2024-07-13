@@ -3,7 +3,7 @@ __pycache__/
 *.egg-info/
 outputs/
 trained_models/*.ckpt
-checkpoints/*.ckpt
+checkpoints/*.pt
 iso_output/*
 core*
 images
