@@ -37,6 +37,7 @@ $ pip install -e ./
 ```
 
 > :bulb:Note
+> 
 > If you move the ISO dir to another place, you should run
 >
 > ```pip cache purge```
@@ -59,8 +60,11 @@ $ export NYU_ROOT=/path/to/NYU/depthbin
 ```
 
 > :bulb:Note
-> Recommend using 
+> 
+> Recommend using
+> 
 > ```echo "export NYU_PREPROCESS=/path/to/NYU/preprocess/folder" >> ~/.bashrc```
+> 
 > format command for future convenience.
 
 4. Preprocess the data to generate labels at a lower scale, which are used to compute the ground truth relation matrices:
