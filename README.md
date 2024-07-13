@@ -19,9 +19,8 @@ $ conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cud
 3. Install the additional dependencies:
 
 ```
-$ git clone https://github.com/hongxiaoy/ISO.git
+$ git clone --recursive https://github.com/hongxiaoy/ISO.git
 $ cd ISO/
-$ git clone https://github.com/LiheYoung/Depth-Anything.git depth_anything
 $ pip install -r requirements.txt
 ```
 
