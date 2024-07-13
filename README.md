@@ -100,3 +100,33 @@ $ python iso/scripts/eval_iso.py \
     NYU_preprocess_root=$NYU_PREPROCESS \
     n_gpus=1 batch_size=1
 ```
+
+### Inference
+
+Please create folder **/path/to/monoscene/output** to store the ISO outputs and store in environment variable:
+
+```
+export ISO_OUTPUT=/path/to/iso/output
+```
+
+#### NYUv2
+
+To generate the predictions on the NYUv2 test set, type:
+
+```
+$ cd ISO/
+$ python iso/scripts/generate_output.py \
+    +output_path=$ISO_OUTPUT \
+    dataset=NYU \
+    NYU_root=$NYU_ROOT \
+    NYU_preprocess_root=$NYU_PREPROCESS \
+    n_gpus=1 batch_size=1
+```
+
+### Visualization
+
+#### NYUv2 
+```
+$ cd ISO/
+$ python iso/scripts/visualization/NYU_vis_pred.py +file=/path/to/output/file.pkl
+```
