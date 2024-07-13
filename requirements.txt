@@ -9,3 +9,4 @@ numpy==1.20.3
 numba==0.53.0
 imageio==2.34.1
 protobuf==3.19.6
+tensorboard

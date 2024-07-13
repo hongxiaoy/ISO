@@ -18,7 +18,7 @@ from depth_anything.metric_depth.zoedepth.models.builder import build_model as b
 from depth_anything.metric_depth.zoedepth.utils.config import get_config as get_depthany_config
 
 from iso.models.modules import sample_grid_feature, get_depth_index, sample_3d_feature, bin_depths
-from iso.models.depth_utils import down_sample_depth_dist
+# from iso.models.depth_utils import down_sample_depth_dist
 from iso.loss.depth_loss import DepthClsLoss
 
 import torch

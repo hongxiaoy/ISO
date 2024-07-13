@@ -50,6 +50,11 @@ $ export NYU_PREPROCESS=/path/to/NYU/preprocess/folder
 $ export NYU_ROOT=/path/to/NYU/depthbin 
 ```
 
+> :bulb:Note
+> Recommend using 
+> ```echo "export NYU_PREPROCESS=/path/to/NYU/preprocess/folder" >> ~/.bashrc```
+> format command for future convenience.
+
 4. Preprocess the data to generate labels at a lower scale, which are used to compute the ground truth relation matrices:
 
 ```

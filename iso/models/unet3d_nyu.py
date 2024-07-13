@@ -13,8 +13,8 @@ from iso.models.modules import (
     Downsample,
     SegmentationHead,
     ASPP,
-    Downsample_SE,
-    Process_SE,
+    # Downsample_SE,
+    # Process_SE,
 )
 
 

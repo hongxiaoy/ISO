@@ -1,10 +1,10 @@
 import sys
 sys.path.append('/home/hongxiao.yu/projects/ISO')
-from iso.data.semantic_kitti.kitti_dm import KittiDataModule
-from iso.data.semantic_kitti.params import (
-    semantic_kitti_class_frequencies,
-    kitti_class_names,
-)
+# from iso.data.semantic_kitti.kitti_dm import KittiDataModule
+# from iso.data.semantic_kitti.params import (
+#     semantic_kitti_class_frequencies,
+#     kitti_class_names,
+# )
 from iso.data.NYU.params import (
     class_weights as NYU_class_weights,
     NYU_class_names,
@@ -27,7 +27,7 @@ hydra.output_subdir = None
 # pl.seed_everything(42, workers=True)
 pl.seed_everything(658018589)  #, workers=True)
 
-@hydra.main(config_name="../config/iso_bevdepth.yaml")
+@hydra.main(config_name="../config/iso.yaml")
 def main(config: DictConfig):
     exp_name = config.exp_prefix
     exp_name += "_{}_{}".format(config.dataset, config.run)
@@ -63,8 +63,6 @@ def main(config: DictConfig):
         if config.voxeldepthcfg.depth_scale_8:
             exp_name += '_8'
             voxeldepth_res.append('8')
-    if config.bevdepth:
-        exp_name += '_bevdepth'
 
     if config.CE_ssc_loss:
         exp_name += "_CEssc"
@@ -142,7 +140,6 @@ def main(config: DictConfig):
         feature=feature,
         full_scene_size=full_scene_size,
         project_res=project_res,
-        bevdepth=config.bevdepth,
         voxeldepth=config.voxeldepth,
         voxeldepth_res=voxeldepth_res,
         n_classes=n_classes,
