@@ -27,7 +27,7 @@ hydra.output_subdir = None
 # pl.seed_everything(42, workers=True)
 pl.seed_everything(658018589)  #, workers=True)
 
-@hydra.main(config_name="../config/iso.yaml")
+@hydra.main(config_name="../config/iso.yaml", config_path='.')
 def main(config: DictConfig):
     exp_name = config.exp_prefix
     exp_name += "_{}_{}".format(config.dataset, config.run)
@@ -129,6 +129,8 @@ def main(config: DictConfig):
         project_res.append("8")
 
     print(exp_name)
+    
+    os.chdir(hydra.utils.get_original_cwd())
 
     # Initialize ISO model
     model = ISO(
