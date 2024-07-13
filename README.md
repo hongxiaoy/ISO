@@ -18,6 +18,6 @@ $ export NYU_ROOT=/path/to/NYU/depthbin
 4. Preprocess the data to generate labels at a lower scale, which are used to compute the ground truth relation matrices:
 
 ```
-$ cd MonoScene/
-$ python monoscene/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
+$ cd ISO/
+$ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
 ```
