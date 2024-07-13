@@ -1,5 +1,42 @@
 # Monocular Occupancy Prediction for Scalable Indoor Scenes
 
+[TOC]
+
+## Preparing ISO
+
+### Installation
+
+1. Create conda environment:
+
+```
+$ conda create -n iso python=3.9 -y
+$ conda activate iso
+```
+2. This code was implemented with python 3.9, pytorch 2.0.0 and CUDA 11.7. Please install [PyTorch](https://pytorch.org/): 
+
+```
+$ conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+```
+
+3. Install the additional dependencies:
+
+```
+$ cd ISO/
+$ pip install -r requirements.txt
+```
+
+4. Install tbb:
+
+```
+$ conda install -c bioconda tbb=2020.2
+```
+
+5. Finally, install ISO:
+
+```
+$ pip install -e ./
+```
+
 ### Datasets
 
 #### NYUv2
