@@ -36,6 +36,13 @@ $ conda install -c bioconda tbb=2020.2
 $ pip install -e ./
 ```
 
+> :bulb:Note
+> If you move the ISO dir to another place, you should run
+>
+> ```pip cache purge```
+>
+> then run ```pip install -e ./``` again.
+
 ### Datasets
 
 #### NYUv2

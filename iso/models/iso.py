@@ -11,9 +11,9 @@ import numpy as np
 import torch.nn.functional as F
 from iso.models.unet2d import UNet2D
 from torch.optim.lr_scheduler import MultiStepLR
-
-from zoedepth.zoedepth.models.builder import build_model
-from zoedepth.zoedepth.utils.config import get_config
+import sys
+sys.path.append('./iso')
+sys.path.append('./iso/depth_anything/metric_depth')
 from depth_anything.metric_depth.zoedepth.models.builder import build_model as build_depthany_model
 from depth_anything.metric_depth.zoedepth.utils.config import get_config as get_depthany_config
 

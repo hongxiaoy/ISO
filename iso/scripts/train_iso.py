@@ -227,7 +227,7 @@ def main(config: DictConfig):
         )
     # import os
     print(os.path.abspath(os.curdir))
-    os.chdir("/home/hongxiao.yu/projects/ISO")
+    os.chdir("/mnt/vdb1/hongxiao.yu/ISO_PUB")
     torch.set_float32_matmul_precision('high')
     trainer.fit(model, data_module)
 
