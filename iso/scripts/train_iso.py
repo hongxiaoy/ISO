@@ -228,8 +228,8 @@ def main(config: DictConfig):
             strategy="ddp_find_unused_parameters_true",
         )
     # import os
-    print(os.path.abspath(os.curdir))
-    os.chdir("/mnt/vdb1/hongxiao.yu/ISO_PUB")
+    # print(os.path.abspath(os.curdir))
+    # os.chdir("/mnt/vdb1/hongxiao.yu/ISO_PUB")
     torch.set_float32_matmul_precision('high')
     trainer.fit(model, data_module)
 
