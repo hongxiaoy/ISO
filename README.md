@@ -60,3 +60,43 @@ $ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_
 ### Pretrained Models
 
 Download ISO pretrained models [on NYUv2](https://huggingface.co/hongxiaoy/ISO/tree/main), then put them in the folder `/path/to/ISO/trained_models`.
+
+## Running ISO
+
+### Training
+
+#### NYUv2
+
+1. Create folders to store training logs at **/path/to/NYU/logdir**.
+
+2. Store in an environment variable:
+
+```
+$ export NYU_LOG=/path/to/NYU/logdir
+```
+
+3.  Train ISO using 2 GPUs with batch_size of 4 (2 item per GPU) on NYUv2:
+```
+$ cd ISO/
+$ python iso/scripts/train_iso.py \
+    dataset=NYU \
+    NYU_root=$NYU_ROOT \
+    NYU_preprocess_root=$NYU_PREPROCESS \
+    logdir=$NYU_LOG \
+    n_gpus=2 batch_size=4
+```
+
+### Evaluating
+
+#### NYUv2
+
+To evaluate ISO on NYUv2 test set, type:
+
+```
+$ cd ISO/
+$ python iso/scripts/eval_iso.py \
+    dataset=NYU \
+    NYU_root=$NYU_ROOT\
+    NYU_preprocess_root=$NYU_PREPROCESS \
+    n_gpus=1 batch_size=1
+```
