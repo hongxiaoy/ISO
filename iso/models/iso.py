@@ -13,7 +13,7 @@ from iso.models.unet2d import UNet2D
 from torch.optim.lr_scheduler import MultiStepLR
 import sys
 sys.path.append('./iso')
-sys.path.append('./iso/depth_anything/metric_depth')
+sys.path.append('./depth_anything/metric_depth')
 from depth_anything.metric_depth.zoedepth.models.builder import build_model as build_depthany_model
 from depth_anything.metric_depth.zoedepth.utils.config import get_config as get_depthany_config
 

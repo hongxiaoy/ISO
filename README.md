@@ -25,6 +25,12 @@ $ git clone https://github.com/LiheYoung/Depth-Anything.git depth_anything
 $ pip install -r requirements.txt
 ```
 
+> :bulb:Note
+> 
+> Change L140 in ```depth_anything/metric_depth/zoedepth/models/base_models/dpt_dinov2/dpt.py``` to
+> 
+> ```self.pretrained = torch.hub.load('facebookresearch/dinov2', 'dinov2_{:}14'.format(encoder), pretrained=False)```
+
 4. Install tbb:
 
 ```
