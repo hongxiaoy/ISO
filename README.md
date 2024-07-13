@@ -20,8 +20,8 @@ $ conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cud
 
 ```
 $ git clone https://github.com/hongxiaoy/ISO.git
-$ git clone https://github.com/LiheYoung/Depth-Anything.git depth_anything
 $ cd ISO/
+$ git clone https://github.com/LiheYoung/Depth-Anything.git depth_anything
 $ pip install -r requirements.txt
 ```
 
