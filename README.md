@@ -30,6 +30,8 @@ $ pip install -r requirements.txt
 > Change L140 in ```depth_anything/metric_depth/zoedepth/models/base_models/dpt_dinov2/dpt.py``` to
 > 
 > ```self.pretrained = torch.hub.load('facebookresearch/dinov2', 'dinov2_{:}14'.format(encoder), pretrained=False)```
+>
+> And download Depth-Anything pre-trained [model](https://github.com/LiheYoung/Depth-Anything/tree/main/metric_depth#evaluation) checkpoints file to ```checkpoints/```.
 
 4. Install tbb:
 
