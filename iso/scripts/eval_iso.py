@@ -81,9 +81,9 @@ def main(config: DictConfig):
         use_gt_depth=config.use_gt_depth,
         add_fusion=config.add_fusion,
         use_zoedepth=config.use_zoedepth,
-        # use_depthanything=config.use_depthanything,
+        use_depthanything=config.use_depthanything,
         zoedepth_as_gt=config.zoedepth_as_gt,
-        # depthanything_as_gt=config.depthanything_as_gt,
+        depthanything_as_gt=config.depthanything_as_gt,
         frozen_encoder=config.frozen_encoder,
     )
     # model = MonoScene(

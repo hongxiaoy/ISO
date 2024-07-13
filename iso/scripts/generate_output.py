@@ -1,8 +1,8 @@
 from pytorch_lightning import Trainer
 from iso.models.iso import ISO
 from iso.data.NYU.nyu_dm import NYUDataModule
-from iso.data.semantic_kitti.kitti_dm import KittiDataModule
-from iso.data.kitti_360.kitti_360_dm import Kitti360DataModule
+# from iso.data.semantic_kitti.kitti_dm import KittiDataModule
+# from iso.data.kitti_360.kitti_360_dm import Kitti360DataModule
 import hydra
 from omegaconf import DictConfig
 import torch
@@ -72,6 +72,19 @@ def main(config: DictConfig):
         model_path = os.path.join(
             get_original_cwd(), "trained_models", "iso_kitti.ckpt"
         )
+    
+    voxeldepth_res = []
+    if config.voxeldepth:
+        if config.voxeldepthcfg.depth_scale_1:
+            voxeldepth_res.append('1')
+        if config.voxeldepthcfg.depth_scale_2:
+            voxeldepth_res.append('2')
+        if config.voxeldepthcfg.depth_scale_4:
+            voxeldepth_res.append('4')
+        if config.voxeldepthcfg.depth_scale_8:
+            voxeldepth_res.append('8')
+    
+    os.chdir(hydra.utils.get_original_cwd())
 
     model = ISO.load_from_checkpoint(
         model_path,
@@ -79,6 +92,16 @@ def main(config: DictConfig):
         project_scale=project_scale,
         fp_loss=config.fp_loss,
         full_scene_size=full_scene_size,
+        voxeldepth=config.voxeldepth,
+        voxeldepth_res=voxeldepth_res,
+        #
+        use_gt_depth=config.use_gt_depth,
+        add_fusion=config.add_fusion,
+        use_zoedepth=config.use_zoedepth,
+        use_depthanything=config.use_depthanything,
+        zoedepth_as_gt=config.zoedepth_as_gt,
+        depthanything_as_gt=config.depthanything_as_gt,
+        frozen_encoder=config.frozen_encoder,
     )
     model.cuda()
     model.eval()
