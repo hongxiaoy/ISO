@@ -30,7 +30,7 @@ $ pip install -r requirements.txt
 > 
 > ```self.pretrained = torch.hub.load('facebookresearch/dinov2', 'dinov2_{:}14'.format(encoder), pretrained=False)```
 >
-> And download Depth-Anything pre-trained [model](https://github.com/LiheYoung/Depth-Anything/tree/main/metric_depth#evaluation) checkpoints file to ```checkpoints/```.
+> Then, download Depth-Anything pre-trained [model](https://github.com/LiheYoung/Depth-Anything/tree/main#no-network-connection-cannot-load-these-models) and metric depth [model](https://github.com/LiheYoung/Depth-Anything/tree/main/metric_depth#evaluation) checkpoints file to ```checkpoints/```.
 
 4. Install tbb:
 
