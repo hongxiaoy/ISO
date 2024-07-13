@@ -11,7 +11,7 @@ from pytorch_lightning import seed_everything
 torch.set_float32_matmul_precision('high')
 
 
-@hydra.main(config_name="../config/iso_voxeldepth_singlescale_addfusion_frozenencoder_depthanythinggt.yaml")
+@hydra.main(config_name="../config/iso.yaml")
 def main(config: DictConfig):
     torch.set_grad_enabled(False)
     if config.dataset == "kitti":
@@ -66,6 +66,9 @@ def main(config: DictConfig):
             voxeldepth_res.append('4')
         if config.voxeldepthcfg.depth_scale_8:
             voxeldepth_res.append('8')
+    
+    os.chdir(hydra.utils.get_original_cwd())
+    
     model = ISO.load_from_checkpoint(
         model_path,
         feature=feature,
