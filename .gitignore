@@ -8,6 +8,5 @@ core*
 images
 .vscode
 logdir
-depth_anything
 checkpoints
 logdir2
