@@ -21,3 +21,7 @@ $ export NYU_ROOT=/path/to/NYU/depthbin
 $ cd ISO/
 $ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
 ```
+
+### Pretrained Models
+
+Download ISO pretrained models [on NYUv2](https://huggingface.co/hongxiaoy/ISO/tree/main), then put them in the folder `/path/to/ISO/trained_models`.
