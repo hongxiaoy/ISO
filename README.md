@@ -1,7 +1,5 @@
 # Monocular Occupancy Prediction for Scalable Indoor Scenes
 
-[TOC]
-
 ## Preparing ISO
 
 ### Installation
