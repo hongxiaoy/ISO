@@ -150,6 +150,19 @@ $ python iso/scripts/generate_output.py \
 
 ### Visualization
 
+You need to create a new Anaconda environment for visualization.
+
+```bash
+conda create -n mayavi_vis python=3.7 -y
+conda activate mayavi_vis
+pip install omegaconf hydra-core PyQt5 mayavi
+```
+
+If you meet some problem when installing `mayavi`, please refer to the following instructions:
+
+- [Official mayavi installation instruction](https://docs.enthought.com/mayavi/installation.html)
+
+
 #### NYUv2 
 ```
 $ cd ISO/
