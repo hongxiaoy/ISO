@@ -2,9 +2,9 @@
 <h2>Monocular Occupancy Prediction for Scalable Indoor Scenes</h2>
 </div>
 
-## Preparing ISO
+# Preparing ISO
 
-### Installation
+## Installation
 
 1. Create conda environment:
 
@@ -54,9 +54,9 @@ $ pip install -e ./
 >
 > then run ```pip install -e ./``` again.
 
-### Datasets
+## Datasets
 
-#### NYUv2
+### NYUv2
 
 1. Download the [NYUv2 dataset](https://www.rocq.inria.fr/rits_files/computer-vision/monoscene/nyu.zip).
 
@@ -84,15 +84,15 @@ $ cd ISO/
 $ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
 ```
 
-### Pretrained Models
+## Pretrained Models
 
 Download ISO pretrained models [on NYUv2](https://huggingface.co/hongxiaoy/ISO/tree/main), then put them in the folder `/path/to/ISO/trained_models`.
 
-## Running ISO
+# Running ISO
 
-### Training
+## Training
 
-#### NYUv2
+### NYUv2
 
 1. Create folders to store training logs at **/path/to/NYU/logdir**.
 
@@ -113,9 +113,9 @@ $ python iso/scripts/train_iso.py \
     n_gpus=2 batch_size=4
 ```
 
-### Evaluating
+## Evaluating
 
-#### NYUv2
+### NYUv2
 
 To evaluate ISO on NYUv2 test set, type:
 
@@ -128,7 +128,7 @@ $ python iso/scripts/eval_iso.py \
     n_gpus=1 batch_size=1
 ```
 
-### Inference
+## Inference
 
 Please create folder **/path/to/monoscene/output** to store the ISO outputs and store in environment variable:
 
@@ -136,7 +136,7 @@ Please create folder **/path/to/monoscene/output** to store the ISO outputs and 
 export ISO_OUTPUT=/path/to/iso/output
 ```
 
-#### NYUv2
+### NYUv2
 
 To generate the predictions on the NYUv2 test set, type:
 
@@ -150,7 +150,7 @@ $ python iso/scripts/generate_output.py \
     n_gpus=1 batch_size=1
 ```
 
-### Visualization
+## Visualization
 
 You need to create a new Anaconda environment for visualization.
 
@@ -165,7 +165,7 @@ If you meet some problem when installing `mayavi`, please refer to the following
 - [Official mayavi installation instruction](https://docs.enthought.com/mayavi/installation.html)
 
 
-#### NYUv2 
+### NYUv2 
 ```
 $ cd ISO/
 $ python iso/scripts/visualization/NYU_vis_pred.py +file=/path/to/output/file.pkl
