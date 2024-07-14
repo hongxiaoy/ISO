@@ -11,6 +11,8 @@
 
 **ECCV 2024**
 
+<img src="NYUv2.gif" width = "800" height = "200" />
+
 </div>
 
 # Preparing ISO
