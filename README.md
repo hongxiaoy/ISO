@@ -1,5 +1,16 @@
 <div align="center">
 <h1>Monocular Occupancy Prediction for Scalable Indoor Scenes</h1>
+
+[**Hongxiao Yu**](https://orcid.org/0009-0003-9249-2726)<sup>1,2</sup> · [**Yuqi Wang**](https://orcid.org/0000-0002-6360-1431)<sup>1,2</sup> · [**Yuntao Chen**](https://orcid.org/0000-0002-9555-1897)<sup>3</sup> · [**Zhaoxiang Zhang**](https://orcid.org/0000-0003-2648-3875)<sup>1,2,3</sup>
+
+<sup>1</sup>School of Artificial Intelligence, University of Chinese Academy of Sciences (UCAS)
+
+<sup>2</sup>NLPR, MAIS, Institute of Automation, Chinese Academy of Sciences (CASIA)
+
+<sup>3</sup>Centre for Artificial Intelligence and Robotics (HKISI_CAS)
+
+**ECCV 2024**
+
 </div>
 
 # Preparing ISO
