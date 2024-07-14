@@ -1,5 +1,6 @@
 <div align="center">
 <h2>Monocular Occupancy Prediction for Scalable Indoor Scenes</h2>
+</div>
 
 ## Preparing ISO
 
