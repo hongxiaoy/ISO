@@ -11,7 +11,10 @@
 
 **ECCV 2024**
 
+[![Static Badge](https://img.shields.io/badge/arxiv-ISO-red)](https://arxiv.org/abs/2407.11730)
+
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/monocular-occupancy-prediction-for-scalable/3d-semantic-scene-completion-from-a-single)](https://paperswithcode.com/sota/3d-semantic-scene-completion-from-a-single?p=monocular-occupancy-prediction-for-scalable)
+
 
 <img src="NYUv2.gif" width = "800" height = "200" />
 
