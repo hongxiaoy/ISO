@@ -118,6 +118,12 @@ model = joblib.load(
 )
 ```
 
+if you have trouble due to the network, try using mirror:
+
+```bash
+export HF_ENDPOINT="https://hf-mirror.com/"
+```
+
 # Running ISO
 
 ## Training
