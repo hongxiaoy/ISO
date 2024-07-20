@@ -106,6 +106,18 @@ $ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_
 
 Download ISO pretrained models [on NYUv2](https://huggingface.co/hongxiaoy/ISO/tree/main), then put them in the folder `/path/to/ISO/trained_models`.
 
+```python
+from huggingface_hub import hf_hub_download
+import joblib
+
+REPO_ID = "hongxiaoy/ISO"
+FILENAME = "iso_nyu.ckpt"
+
+model = joblib.load(
+    hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
+)
+```
+
 # Running ISO
 
 ## Training
