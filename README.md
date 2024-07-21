@@ -110,6 +110,8 @@ Download ISO pretrained models [on NYUv2](https://huggingface.co/hongxiaoy/ISO/t
 huggingface-cli download --repo-type model hongxiaoy/ISO
 ```
 
+If you didn't install `huggingface-cli` before, please following [official instructions](https://huggingface.co/docs/hub/en/models-adding-libraries#installation).
+
 # Running ISO
 
 ## Training
