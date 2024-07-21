@@ -1,1 +1,0 @@
-python iso/scripts/train_iso.py n_gpus=2 batch_size=4
