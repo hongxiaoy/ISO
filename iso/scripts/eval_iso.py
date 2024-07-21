@@ -86,11 +86,6 @@ def main(config: DictConfig):
         depthanything_as_gt=config.depthanything_as_gt,
         frozen_encoder=config.frozen_encoder,
     )
-    # model = MonoScene(
-    #     dataset=config.dataset,
-    #     frustum_size=config.frustum_size,
-    #     n_relations=config.n_relations,
-    # )
     model.eval()
     data_module.setup()
     val_dataloader = data_module.val_dataloader()
