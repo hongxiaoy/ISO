@@ -1,10 +1,5 @@
 import sys
 sys.path.append('/home/hongxiao.yu/projects/ISO')
-# from iso.data.semantic_kitti.kitti_dm import KittiDataModule
-# from iso.data.semantic_kitti.params import (
-#     semantic_kitti_class_frequencies,
-#     kitti_class_names,
-# )
 from iso.data.NYU.params import (
     class_weights as NYU_class_weights,
     NYU_class_names,
@@ -24,7 +19,6 @@ import torch
 
 hydra.output_subdir = None
 
-# pl.seed_everything(42, workers=True)
 pl.seed_everything(658018589)  #, workers=True)
 
 @hydra.main(config_name="../config/iso.yaml", config_path='.')
@@ -162,21 +156,6 @@ def main(config: DictConfig):
         depthanything_as_gt=config.depthanything_as_gt,
         frozen_encoder=config.frozen_encoder,
     )
-    # pretrained_model = torch.load('/home/hongxiao.yu/ISO/logdir2/occscannet_pretrained.pt')
-    # model.load_state_dict(pretrained_model)
-    # model_state_dict = model.state_dict()
-    # for k in model_state_dict.keys():
-    #     if 'depthnet' in k:
-    #         model_state_dict[k] = pretrained_model[k]
-    #     if 'decoder' in k and 'net_rgb' in k:
-    #         model_state_dict[k] = pretrained_model[k]
-    # model.load_state_dict(model_state_dict)
-    # layer_names = []
-    # for k, v in model.named_parameters():
-    #     layer_names.append(k+'\n')
-    #     # model.parameters()[k] = pretrained_model[k]
-    # with open('monoscene_layer_names.txt', 'w') as f:
-    #     f.writelines(layer_names)
 
     if config.enable_log:
         logger = TensorBoardLogger(save_dir=logdir, name=exp_name, version="")
@@ -227,9 +206,6 @@ def main(config: DictConfig):
             # flush_logs_every_n_steps=100,
             strategy="ddp_find_unused_parameters_true",
         )
-    # import os
-    # print(os.path.abspath(os.curdir))
-    # os.chdir("/mnt/vdb1/hongxiao.yu/ISO_PUB")
     torch.set_float32_matmul_precision('high')
     trainer.fit(model, data_module)
 
