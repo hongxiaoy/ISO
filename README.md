@@ -166,7 +166,7 @@ $ python iso/scripts/eval_iso.py \
 
 ## Inference
 
-Please create folder **/path/to/monoscene/output** to store the ISO outputs and store in environment variable:
+Please create folder **/path/to/iso/output** to store the ISO outputs and store in environment variable:
 
 ```
 export ISO_OUTPUT=/path/to/iso/output
