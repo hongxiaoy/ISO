@@ -11,8 +11,8 @@
 
 **ECCV 2024**
 
-[![Static Badge](https://img.shields.io/badge/arXiv-2407.11730-red)](https://arxiv.org/abs/2407.11730) ![Static Badge](https://img.shields.io/badge/Project%20Page-ISO-blue)
- ![Static Badge](https://img.shields.io/badge/demo-Hugging%20Face-yellow)
+[![Static Badge](https://img.shields.io/badge/arXiv-2407.11730-red)](https://arxiv.org/abs/2407.11730) [[Static Badge](https://img.shields.io/badge/Project%20Page-ISO-blue)](https://hongxiaoy.github.io/ISO)
+ [![Static Badge](https://img.shields.io/badge/demo-Hugging%20Face-yellow)](https://huggingface.co/spaces/hongxiaoy/ISO)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/monocular-occupancy-prediction-for-scalable/3d-semantic-scene-completion-from-a-single)](https://paperswithcode.com/sota/3d-semantic-scene-completion-from-a-single?p=monocular-occupancy-prediction-for-scalable)
 
