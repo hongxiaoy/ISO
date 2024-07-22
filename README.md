@@ -199,6 +199,8 @@ $ python iso/scripts/visualization/NYU_vis_pred.py +file=/path/to/output/file.pk
 
 # Aknowledgement
 
+This project is built based on MonoScene. Please refer to (https://github.com/astra-vision/MonoScene) for more documentations and details.
+
 We would like to thank the creators, maintainers, and contributors of the [MonoScene](https://github.com/astra-vision/MonoScene), [NDC-Scene](https://github.com/Jiawei-Yao0812/NDCScene), [ZoeDepth](https://github.com/isl-org/ZoeDepth), [Depth Anything](https://github.com/LiheYoung/Depth-Anything) for their invaluable work. Their dedication and open-source spirit have been instrumental in our development.
 
 # Citation
