@@ -218,3 +218,12 @@ This project is built based on MonoScene. Please refer to (https://github.com/as
 We would like to thank the creators, maintainers, and contributors of the [MonoScene](https://github.com/astra-vision/MonoScene), [NDC-Scene](https://github.com/Jiawei-Yao0812/NDCScene), [ZoeDepth](https://github.com/isl-org/ZoeDepth), [Depth Anything](https://github.com/LiheYoung/Depth-Anything) for their invaluable work. Their dedication and open-source spirit have been instrumental in our development.
 
 # Citation
+
+```
+@article{yu2024monocular,
+  title={Monocular Occupancy Prediction for Scalable Indoor Scenes},
+  author={Yu, Hongxiao and Wang, Yuqi and Chen, Yuntao and Zhang, Zhaoxiang},
+  journal={arXiv preprint arXiv:2407.11730},
+  year={2024}
+}
+```
