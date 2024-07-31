@@ -31,8 +31,9 @@ Here we compare our ISO with the previously best NDC-Scene and MonoScene model.
 | NDC-Scene| 44.17 | 12.02 | **93.51** | 13.11 | 13.77 | 15.83 | 49.57 | 39.87 | 17.17 | 24.57 | 31.00 | 14.96 | 29.03 |
 | Ours | **47.11** | **14.21** | 93.47 | **15.89** | **15.14** | **18.35** | **50.01** | **40.82** | **18.25** | **25.90** | **34.08** | **17.67** | **31.25** |
 
-
 We highlight the **best** results in **bold**.
+
+Pretrained models on NYUv2 can be downloaded [here](https://huggingface.co/hongxiaoy/ISO/tree/main).
 
 # Preparing ISO
 
