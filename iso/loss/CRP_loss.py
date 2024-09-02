@@ -18,7 +18,7 @@ def compute_super_CP_multilabel_loss(pred_logits, CP_mega_matrices):
 
     cnt_neg = (labels == 0).sum(0)
     cnt_pos = labels.sum(0)
-    pos_weight = cnt_neg / cnt_pos
+    pos_weight = cnt_neg / (cnt_pos + 1e-5)
     criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
     loss_bce = criterion(logits, labels.float())
     return loss_bce

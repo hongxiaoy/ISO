@@ -86,9 +86,14 @@ def vox2pix(cam_E, cam_k,
     vol_bnds = np.zeros((3,2))
     vol_bnds[:,0] = vox_origin
     vol_bnds[:,1] = vox_origin + np.array(scene_size)
+    
 
     # Compute the voxels centroids in lidar cooridnates
-    vol_dim = np.ceil((vol_bnds[:,1]- vol_bnds[:,0])/ voxel_size).copy(order='C').astype(int)
+    # TODO: Make sure the around process has no influence on the NYUv2 result.
+    vol_dim = np.ceil(np.around((vol_bnds[:,1]- vol_bnds[:,0])/ voxel_size, 3)).copy(order='C').astype(int)
+    if vol_dim[0] != 60 or vol_dim[1] != 60 or vol_dim[2] != 36:
+        print("Find it:", vol_dim, '\n', vol_bnds, vol_bnds.dtype)
+        exit(-1)
     xv, yv, zv = np.meshgrid(
             range(vol_dim[0]),
             range(vol_dim[1]),
@@ -173,7 +178,7 @@ def compute_local_frustums(projected_pix, pix_z, target, img_W, img_H, dataset, 
             local_frustum = compute_local_frustum(pix_x, pix_y, start_x, end_x, start_y, end_y, pix_z)
             if dataset == "NYU":
                 mask = (target != 255) & np.moveaxis(local_frustum.reshape(60, 60, 36), [0, 1, 2], [0, 2, 1])
-            elif dataset == "kitti":
+            elif dataset == "OccScanNet" or dataset == "OccScanNet_mini":
                 mask = (target != 255) & local_frustum.reshape(H, W, D)
 
             local_frustum_masks.append(mask)

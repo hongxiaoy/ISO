@@ -98,7 +98,7 @@ class ISO(pl.LightningModule):
         self.projects = nn.ModuleDict(self.projects)
 
         self.n_classes = n_classes
-        if self.dataset == "NYU":
+        if self.dataset == "NYU" or self.dataset == "OccScanNet" or self.dataset == "OccScanNet_mini":
             self.net_3d_decoder = UNet3DNYU(
                 self.n_classes,
                 nn.BatchNorm3d,
@@ -320,6 +320,7 @@ class ISO(pl.LightningModule):
                         # depth_1_1 = rslts['metric_depth']  # (1, 1, 480, 640)
                     # print(depth_1_1.shape)
                     depth_1_1 = bin_depths(depth_map=depth_1_1, target=True, **disc_cfg).cuda()  # (1, 1, 480, 640)
+                    print(depth_1_1.shape)
                     # depth_1_1 = ((depth_1_1 - (0.1 - 0.13)) / 0.13).cuda().long()
                     # print(depth_1_1.shape)
                     depth_1_1 = F.one_hot(depth_1_1[:, 0, :, :], 81).permute(0, 3, 1, 2)[:, :-1, :, :]  # (1, 81, 480, 640)
@@ -353,7 +354,7 @@ class ISO(pl.LightningModule):
                     probs[dist_mask] = sample_3d_feature(depths['1_'+str(res)], projected_pix//int(res), pix_z_index, dist_mask)
                     if self.dataset == 'NYU':
                         x3d_depths['1_'+str(res)] = probs.reshape(60, 60, 36).permute(0, 2, 1).unsqueeze(0)
-                    elif self.dataset == 'ScanNet':
+                    elif self.dataset == 'OccScanNet' or self.dataset == 'OccScanNet_mini':
                         x3d_depths['1_'+str(res)] = probs.reshape(60, 60, 36).unsqueeze(0)
                     depth_preds['1_'+str(res)].append(depths['1_'+str(res)])  # (1, 64, 60, 80)
             
@@ -506,6 +507,9 @@ class ISO(pl.LightningModule):
         loss = 0
         out_dict = self(batch)
         ssc_pred = out_dict["ssc_logit"]
+        ssc_pred = torch.where(torch.isinf(ssc_pred), torch.zeros_like(ssc_pred), ssc_pred)
+        ssc_pred = torch.where(torch.isnan(ssc_pred), torch.zeros_like(ssc_pred), ssc_pred)
+        # print(ssc_pred.requires_grad, ssc_pred.grad_fn)
         # torch.cuda.manual_seed_all(42)
         # ssc_pred = torch.randn_like(ssc_pred)
         target = batch["target"]
@@ -513,12 +517,18 @@ class ISO(pl.LightningModule):
         if self.voxeldepth and not self.use_gt_depth:
             loss_depth_dict = {}
             loss_depth = 0.0
+            out_dict['depth_1_1'] = torch.where(torch.isnan(out_dict['depth_1_1']), torch.zeros_like(out_dict['depth_1_1']), out_dict['depth_1_1'], )
+            # print(521, torch.any(torch.isnan(out_dict['depth_1_1'])))
+            if torch.any(torch.isnan(out_dict['depth_1_1'])):
+                print("===== Got Inf !!! =====")
+                exit(-1)
             for res in self.voxeldepth_res:
                 loss_depth_dict['1_'+str(res)] = DepthClsLoss(int(res), [0.0, 10, 0.16], 64).get_depth_loss(out_dict['depth_gt'], 
                                                                                                  out_dict['depth_1_'+str(res)].unsqueeze(1))
                 loss_depth += loss_depth_dict['1_'+str(res)]
             loss_depth = loss_depth / len(loss_depth_dict)
             loss += loss_depth
+            # print(521, torch.any(torch.isnan(loss_depth)))
             self.log(
                 step_type + "/loss_depth",
                 loss_depth.detach(),
@@ -528,13 +538,18 @@ class ISO(pl.LightningModule):
 
         if self.context_prior:
             P_logits = out_dict["P_logits"]
+            P_logits = torch.where(torch.isnan(P_logits), torch.zeros_like(P_logits), P_logits)
+            
             CP_mega_matrices = batch["CP_mega_matrices"]
 
             if self.relation_loss:
+                # print(543, torch.any(torch.isnan(P_logits)))
                 loss_rel_ce = compute_super_CP_multilabel_loss(
                     P_logits, CP_mega_matrices
                 )
+                # loss_rel_ce = torch.where(torch.isnan(loss_rel_ce), torch.zeros_like(loss_rel_ce), loss_rel_ce)
                 loss += loss_rel_ce
+                # print(543, torch.any(torch.isnan(loss_rel_ce)))
                 self.log(
                     step_type + "/loss_relation_ce_super",
                     loss_rel_ce.detach(),
@@ -545,6 +560,7 @@ class ISO(pl.LightningModule):
         class_weight = self.class_weights.type_as(batch["img"])
         if self.CE_ssc_loss:
             loss_ssc = CE_ssc_loss(ssc_pred, target, class_weight)
+            # print(558, torch.any(torch.isnan(loss_ssc)))
             loss += loss_ssc
             self.log(
                 step_type + "/loss_ssc",
@@ -555,6 +571,7 @@ class ISO(pl.LightningModule):
 
         if self.sem_scal_loss:
             loss_sem_scal = sem_scal_loss(ssc_pred, target)
+            # print(569, torch.any(torch.isnan(loss_sem_scal)))
             loss += loss_sem_scal
             self.log(
                 step_type + "/loss_sem_scal",
@@ -565,6 +582,7 @@ class ISO(pl.LightningModule):
 
         if self.geo_scal_loss:
             loss_geo_scal = geo_scal_loss(ssc_pred, target)
+            # print(580, torch.any(torch.isnan(loss_geo_scal)))
             loss += loss_geo_scal
             self.log(
                 step_type + "/loss_geo_scal",
@@ -602,6 +620,7 @@ class ISO(pl.LightningModule):
                     frustum_nonempty += 1
             frustum_loss = frustum_loss / frustum_nonempty
             loss += frustum_loss
+            # print(618, torch.any(torch.isnan(frustum_loss)))
             self.log(
                 step_type + "/loss_frustums",
                 frustum_loss.detach(),
@@ -617,6 +636,7 @@ class ISO(pl.LightningModule):
         self.log(step_type + "/loss", loss.detach(), on_epoch=True, sync_dist=True, prog_bar=True)
         
         # loss_dict = {'loss': loss}
+        # print(636, torch.any(torch.isnan(loss)))
 
         return loss
 
@@ -688,9 +708,18 @@ class ISO(pl.LightningModule):
             )
             scheduler = MultiStepLR(optimizer, milestones=[20], gamma=0.1)
             return [optimizer], [scheduler]
-        elif self.dataset == "kitti":
+        elif self.dataset == "OccScanNet" or self.dataset == "OccScanNet_mini" and self.voxeldepth:
+            depth_params = []
+            other_params = []
+            for k, p in self.named_parameters():
+                if 'depthnet_1_1' in k:
+                    depth_params.append(p)
+                else:
+                    other_params.append(p)
+            params_list = [{'params': depth_params, 'lr': self.lr * 0.05},  # 0.4 high, 0.1 unstable, 0.05 ok
+                    {'params': other_params}]
             optimizer = torch.optim.AdamW(
-                self.parameters(), lr=self.lr, weight_decay=self.weight_decay
+                params_list, lr=self.lr, weight_decay=self.weight_decay
             )
-            scheduler = MultiStepLR(optimizer, milestones=[20], gamma=0.1)
+            scheduler = MultiStepLR(optimizer, milestones=[40], gamma=0.1)
             return [optimizer], [scheduler]

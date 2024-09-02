@@ -1,10 +1,15 @@
 import sys
-sys.path.append('/home/hongxiao.yu/projects/ISO')
+sys.path.append('/home/hongxiao.yu/projects/ISO_occscannet/depth_anything')
 from iso.data.NYU.params import (
     class_weights as NYU_class_weights,
     NYU_class_names,
 )
+from iso.data.OccScanNet.params import (
+    class_weights as OccScanNet_class_weights,
+    OccScanNet_class_names
+)
 from iso.data.NYU.nyu_dm import NYUDataModule
+from iso.data.OccScanNet.occscannet_dm import OccScanNetDataModule
 from torch.utils.data.dataloader import DataLoader
 from iso.models.iso import ISO
 from pytorch_lightning import Trainer
@@ -21,7 +26,7 @@ hydra.output_subdir = None
 
 pl.seed_everything(658018589)  #, workers=True)
 
-@hydra.main(config_name="../config/iso.yaml", config_path='.')
+@hydra.main(config_name="../config/iso_occscannet_mini.yaml", config_path='.')
 def main(config: DictConfig):
     exp_name = config.exp_prefix
     exp_name += "_{}_{}".format(config.dataset, config.run)
@@ -73,24 +78,37 @@ def main(config: DictConfig):
         exp_name += "_3DCRP"
 
     # Setup dataloaders
-    if config.dataset == "kitti":
-        class_names = kitti_class_names
-        max_epochs = 30
-        logdir = config.kitti_logdir
-        full_scene_size = (256, 256, 32)
-        project_scale = 2
-        feature = 64
-        n_classes = 20
-        class_weights = torch.from_numpy(
-            1 / np.log(semantic_kitti_class_frequencies + 0.001)
-        )
-        data_module = KittiDataModule(
-            root=config.kitti_root,
-            preprocess_root=config.kitti_preprocess_root,
+    if config.dataset == "OccScanNet":
+        class_names = OccScanNet_class_names
+        max_epochs = 60
+        logdir = config.logdir
+        full_scene_size = (60, 60, 36)
+        project_scale = 1
+        feature = 200
+        n_classes = 12
+        class_weights = OccScanNet_class_weights
+        data_module = OccScanNetDataModule(
+            n_relations=config.n_relations,
             frustum_size=config.frustum_size,
-            project_scale=project_scale,
             batch_size=int(config.batch_size / config.n_gpus),
-            num_workers=int(config.num_workers_per_gpu),
+            num_workers=int(config.num_workers_per_gpu * config.n_gpus),
+        )
+    elif config.dataset == "OccScanNet_mini":
+        class_names = OccScanNet_class_names
+        max_epochs = 60
+        logdir = config.logdir
+        full_scene_size = (60, 60, 36)
+        project_scale = 1
+        feature = 200
+        n_classes = 12
+        class_weights = OccScanNet_class_weights
+        data_module = OccScanNetDataModule(
+            n_relations=config.n_relations,
+            frustum_size=config.frustum_size,
+            batch_size=int(config.batch_size / config.n_gpus),
+            num_workers=int(config.num_workers_per_gpu * config.n_gpus),
+            train_scenes_sample=4639,
+            val_scenes_sample=2007,
         )
 
     elif config.dataset == "NYU":
@@ -207,6 +225,7 @@ def main(config: DictConfig):
             strategy="ddp_find_unused_parameters_true",
         )
     torch.set_float32_matmul_precision('high')
+    # os.chdir("/home/hongxiao.yu/projects/ISO_occscannet")
     trainer.fit(model, data_module)
 
 

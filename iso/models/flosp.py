@@ -30,7 +30,7 @@ class FLoSP(nn.Module):
                 self.scene_size[1] // self.project_scale,
             )
             x3d = x3d.permute(0, 1, 3, 2)
-        elif self.dataset == "kitti":
+        elif self.dataset == "OccScanNet" or self.dataset == "OccScanNet_mini":
             x3d = src_feature.reshape(
                 c,
                 self.scene_size[0] // self.project_scale,

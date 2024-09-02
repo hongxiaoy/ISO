@@ -59,6 +59,9 @@ class DepthClsLoss:
         return gt_depths.float()
 
     def get_depth_loss(self, depth_labels, depth_preds):
+        if len(depth_labels.shape) != 4:
+            depth_labels = depth_labels.unsqueeze(1)
+            # print(depth_labels.shape)
         N_pred, n_cam_pred, D, H, W = depth_preds.shape
         N_gt, n_cam_label, oriH, oriW = depth_labels.shape
         assert (
@@ -90,5 +93,6 @@ class DepthClsLoss:
                 depth_labels[fg_mask],
                 reduction="none",
             ).sum() / max(1.0, fg_mask.sum())
+            # depth_loss = torch.nan_to_num(depth_loss, nan=0.)
 
         return depth_loss
