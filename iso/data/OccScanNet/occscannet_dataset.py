@@ -23,6 +23,7 @@ class OccScanNetDataset(Dataset):
     def __init__(
         self,
         split,
+        root,
         interval=-1,
         train_scenes_sample=-1,
         val_scenes_sample=-1,
@@ -33,7 +34,7 @@ class OccScanNetDataset(Dataset):
         v2=False,
     ):  
         # cur_dir = os.path.abspath(os.path.curdir)
-        iso_mm_path = os.getenv["ISO_MM_PATH"]
+        self.occscannet_root = root
         
         self.n_relations = n_relations
         self.frustum_size = frustum_size
@@ -49,13 +50,13 @@ class OccScanNetDataset(Dataset):
         
         # print(os.getcwd())
         if v2:
-            subscenes_list = f'{iso_mm_path}/data/occscannet/{self.split}_subscenes_v2.txt'
+            subscenes_list = f'{self.occscannet_root}/{self.split}_subscenes_v2.txt'
         else:  # data/occscannet/train_subscenes.txt
-            subscenes_list = f'{iso_mm_path}/data/occscannet/{self.split}_subscenes.txt'
+            subscenes_list = f'{self.occscannet_root}/{self.split}_subscenes.txt'
         with open(subscenes_list, 'r') as f:
             self.used_subscenes = f.readlines()
             for i in range(len(self.used_subscenes)):
-                self.used_subscenes[i] = f'{iso_mm_path}/data/occscannet/' + self.used_subscenes[i].strip()
+                self.used_subscenes[i] = f'{self.occscannet_root}/' + self.used_subscenes[i].strip()
        
         if "train" in self.split:
             # breakpoint()
@@ -85,8 +86,6 @@ class OccScanNetDataset(Dataset):
 
     def __getitem__(self, index):
         name = self.used_subscenes[index]
-        iso_mm_path = os.getenv["ISO_MM_PATH"]
-        name = f"{iso_mm_path}/"+name
         with open(name, 'rb') as f:
             data = pickle.load(f)
 

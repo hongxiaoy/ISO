@@ -88,6 +88,7 @@ def main(config: DictConfig):
         n_classes = 12
         class_weights = OccScanNet_class_weights
         data_module = OccScanNetDataModule(
+            root=config.OccScanNet_root,
             n_relations=config.n_relations,
             frustum_size=config.frustum_size,
             batch_size=int(config.batch_size / config.n_gpus),
@@ -103,6 +104,7 @@ def main(config: DictConfig):
         n_classes = 12
         class_weights = OccScanNet_class_weights
         data_module = OccScanNetDataModule(
+            root=config.OccScanNet_root,
             n_relations=config.n_relations,
             frustum_size=config.frustum_size,
             batch_size=int(config.batch_size / config.n_gpus),

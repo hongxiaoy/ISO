@@ -5,6 +5,7 @@ n_relations: 4
 enable_log: true
 
 logdir: "/mnt/vdb1/hongxiao.yu/logs/ISO_occscannet_logs/"
+OccScanNet_root: "/mnt/vdb1/hongxiao.yu/data/NYU_dataset/depthbin/"
 
 
 fp_loss: true 

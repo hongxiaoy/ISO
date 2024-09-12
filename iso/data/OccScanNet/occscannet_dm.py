@@ -8,6 +8,7 @@ from iso.data.utils.torch_util import worker_init_fn
 class OccScanNetDataModule(pl.LightningDataModule):
     def __init__(
         self,
+        root,
         n_relations=4,
         batch_size=4,
         frustum_size=4,
@@ -18,6 +19,8 @@ class OccScanNetDataModule(pl.LightningDataModule):
         v2=False,
     ):
         super().__init__()
+
+        self.root = root
         self.n_relations = n_relations
         
         self.batch_size = batch_size
@@ -30,6 +33,7 @@ class OccScanNetDataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         self.train_ds = OccScanNetDataset(
             split="train",
+            root=self.root,
             n_relations=self.n_relations,
             fliplr=0.5,
             train_scenes_sample=self.train_scenes_sample,
@@ -38,6 +42,7 @@ class OccScanNetDataModule(pl.LightningDataModule):
         )
         self.test_ds = OccScanNetDataset(
             split="val",
+            root=self.root,
             n_relations=self.n_relations,
             val_scenes_sample = self.val_scenes_sample,
             frustum_size=self.frustum_size,

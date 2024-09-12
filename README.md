@@ -97,25 +97,49 @@ $ pip install -e ./
 
 3. Store paths in environment variables for faster access:
 
-```
-$ export NYU_PREPROCESS=/path/to/NYU/preprocess/folder
-$ export NYU_ROOT=/path/to/NYU/depthbin 
-```
+    ```
+    $ export NYU_PREPROCESS=/path/to/NYU/preprocess/folder
+    $ export NYU_ROOT=/path/to/NYU/depthbin 
+    ```
 
-> :bulb:Note
-> 
-> Recommend using
-> 
-> ```echo "export NYU_PREPROCESS=/path/to/NYU/preprocess/folder" >> ~/.bashrc```
-> 
-> format command for future convenience.
+    > :bulb:Note
+    > 
+    > Recommend using
+    > 
+    > ```echo "export NYU_PREPROCESS=/path/to/NYU/preprocess/folder" >> ~/.bashrc```
+    > 
+    > format command for future convenience.
 
 4. Preprocess the data to generate labels at a lower scale, which are used to compute the ground truth relation matrices:
 
-```
-$ cd ISO/
-$ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
-```
+    ```
+    $ cd ISO/
+    $ python iso/data/NYU/preprocess.py NYU_root=$NYU_ROOT NYU_preprocess_root=$NYU_PREPROCESS
+    ```
+
+### Occ-ScanNet
+
+1. Download the [Occ-ScanNet dataset](https://www.rocq.inria.fr/rits_files/computer-vision/monoscene/nyu.zip), this include：
+    - `posed_images`
+    - `gathered_data`
+    - `train_subscenes.txt`
+    - `val_subscenes.txt`
+
+2. Create a root folder to store Occ-ScanNet dataset `/path/to/Occ/ScanNet/folder`, and move the all dataset files to  this folder, zip files need extraction.
+
+3. Store paths in environment variables for faster access:
+
+    ```
+    $ export OCC_SCANNET_ROOT=/path/to/Occ/ScanNet/folder
+    ```
+
+    > :bulb:Note
+    > 
+    > Recommend using
+    > 
+    > ```echo "export OCC_SCANNET_ROOT=/path/to/Occ/ScanNet/folder" >> ~/.bashrc```
+    > 
+    > format command for future convenience.
 
 ## Pretrained Models
 
@@ -149,6 +173,26 @@ $ python iso/scripts/train_iso.py \
     NYU_root=$NYU_ROOT \
     NYU_preprocess_root=$NYU_PREPROCESS \
     logdir=$NYU_LOG \
+    n_gpus=2 batch_size=4
+```
+
+### Occ-ScanNet
+
+1. Create folders to store training logs at **/path/to/OccScanNet/logdir**.
+
+2. Store in an environment variable:
+
+```
+$ export OCC_SCANNET_LOG=/path/to/OccScanNet/logdir
+```
+
+3.  Train ISO using 2 GPUs with batch_size of 4 (2 item per GPU) on Occ-ScanNet (should match config file name in train_iso.py):
+```
+$ cd ISO/
+$ python iso/scripts/train_iso.py \
+    dataset=OccScanNet \
+    OccScanNet_root=$OCC_SCANNET_ROOT \
+    logdir=$OCC_SCANNET_LOG \
     n_gpus=2 batch_size=4
 ```
 
