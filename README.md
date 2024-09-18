@@ -119,7 +119,7 @@ $ pip install -e ./
 
 ### Occ-ScanNet
 
-1. Download the [Occ-ScanNet dataset](https://www.rocq.inria.fr/rits_files/computer-vision/monoscene/nyu.zip), this include：
+1. Download the [Occ-ScanNet dataset](https://huggingface.co/datasets/hongxiaoy/OccScanNet), this include：
     - `posed_images`
     - `gathered_data`
     - `train_subscenes.txt`
